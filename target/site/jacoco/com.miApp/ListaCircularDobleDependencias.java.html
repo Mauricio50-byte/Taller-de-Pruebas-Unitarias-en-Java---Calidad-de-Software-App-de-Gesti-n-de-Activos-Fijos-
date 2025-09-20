@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ListaCircularDobleDependencias.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">App_De_ActivosFijos</a> &gt; <a href="index.source.html" class="el_package">com.miApp</a> &gt; <span class="el_source">ListaCircularDobleDependencias.java</span></div><h1>ListaCircularDobleDependencias.java</h1><pre class="source lang-java linenums">package com.miApp;
+
+public class ListaCircularDobleDependencias {
+    private NodoDependencia head;
+    private NodoDependencia tail;
+
+<span class="nc" id="L7">    public ListaCircularDobleDependencias() {</span>
+<span class="nc" id="L8">        this.head = null;</span>
+<span class="nc" id="L9">        this.tail = null;</span>
+<span class="nc" id="L10">    }</span>
+
+    public void agregar(Dependencias dependencia) {
+<span class="nc" id="L13">        NodoDependencia nuevoNodo = new NodoDependencia(dependencia);</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        if (head == null) {</span>
+<span class="nc" id="L15">            head = nuevoNodo;</span>
+<span class="nc" id="L16">            tail = nuevoNodo;</span>
+        } else {
+<span class="nc" id="L18">            tail.next = nuevoNodo;</span>
+<span class="nc" id="L19">            nuevoNodo.prev = tail;</span>
+<span class="nc" id="L20">            nuevoNodo.next = head;</span>
+<span class="nc" id="L21">            head.prev = nuevoNodo;</span>
+<span class="nc" id="L22">            tail = nuevoNodo;</span>
+        }
+<span class="nc" id="L24">    }</span>
+
+    public NodoDependencia getHead() {
+<span class="nc" id="L27">        return head;</span>
+    }
+
+    public NodoDependencia getTail() {
+<span class="nc" id="L31">        return tail;</span>
+    }
+
+    
+    // Método para ordenar la lista por nombre de dependencia
+    public void ordenarPorNombre() {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (head == null) {</span>
+<span class="nc" id="L38">            return;</span>
+        }
+        
+<span class="nc" id="L41">        NodoDependencia current = head;</span>
+        do {
+<span class="nc" id="L43">            NodoDependencia temp = current.next;</span>
+<span class="nc bnc" id="L44" title="All 2 branches missed.">            while (temp != head) {</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">                if (current.dependencia.nombre.compareTo(temp.dependencia.nombre) &gt; 0) {</span>
+                    // Intercambiar dependencias
+<span class="nc" id="L47">                    Dependencias tempDependencia = current.dependencia;</span>
+<span class="nc" id="L48">                    current.dependencia = temp.dependencia;</span>
+<span class="nc" id="L49">                    temp.dependencia = tempDependencia;</span>
+                }
+<span class="nc" id="L51">                temp = temp.next;</span>
+            }
+<span class="nc" id="L53">            current = current.next;</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        } while (current != head);</span>
+<span class="nc" id="L55">    }</span>
+
+    // Método para ordenar la lista por valor total de activos (ascendente)
+    public void ordenarPorValorTotalAscendente() {
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        if (head == null) {</span>
+<span class="nc" id="L60">            return;</span>
+        }
+        
+<span class="nc" id="L63">        NodoDependencia current = head;</span>
+        do {
+<span class="nc" id="L65">            NodoDependencia temp = current.next;</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            while (temp != head) {</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">                if (current.dependencia.calcularTotal() &gt; temp.dependencia.calcularTotal()) {</span>
+                    // Intercambiar dependencias
+<span class="nc" id="L69">                    Dependencias tempDependencia = current.dependencia;</span>
+<span class="nc" id="L70">                    current.dependencia = temp.dependencia;</span>
+<span class="nc" id="L71">                    temp.dependencia = tempDependencia;</span>
+                }
+<span class="nc" id="L73">                temp = temp.next;</span>
+            }
+<span class="nc" id="L75">            current = current.next;</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        } while (current != head);</span>
+<span class="nc" id="L77">    }</span>
+
+    // Método para buscar una dependencia por nombre
+    public Dependencias buscarPorNombre(String nombre) {
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (head == null) {</span>
+<span class="nc" id="L82">            return null;</span>
+        }
+        
+<span class="nc" id="L85">        NodoDependencia current = head;</span>
+        do {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">            if (current.dependencia.nombre.equals(nombre)) {</span>
+<span class="nc" id="L88">                return current.dependencia;</span>
+            }
+<span class="nc" id="L90">            current = current.next;</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">        } while (current != head);</span>
+        
+<span class="nc" id="L93">        return null; // No se encontró ninguna dependencia con el nombre dado</span>
+    }
+
+    // Método para buscar una dependencia por valor total de activos
+    public Dependencias buscarPorValorTotal(double valorTotal) {
+<span class="nc bnc" id="L98" title="All 2 branches missed.">        if (head == null) {</span>
+<span class="nc" id="L99">            return null;</span>
+        }
+        
+<span class="nc" id="L102">        NodoDependencia current = head;</span>
+        do {
+<span class="nc bnc" id="L104" title="All 2 branches missed.">            if (current.dependencia.calcularTotal() == valorTotal) {</span>
+<span class="nc" id="L105">                return current.dependencia;</span>
+            }
+<span class="nc" id="L107">            current = current.next;</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        } while (current != head);</span>
+        
+<span class="nc" id="L110">        return null; // No se encontró ninguna dependencia con el valor total dado</span>
+    }
+
+    // Método para buscar una dependencia por un activo específico
+    /*public Dependencias buscarPorActivo(int numeroDeActivo) {
+        if (head == null) {
+            return null;
+        }
+        
+        NodoDependencia current = head;
+        do {
+            for (Activo activo : current.dependencia.getActivos()) {
+                if (activo.numeroDeActivo == numeroDeActivo) {
+                    return current.dependencia;
+                }
+            }
+            current = current.next;
+        } while (current != head);
+        
+        return null; // No se encontró ninguna dependencia que contenga el activo con el número dado
+    }*/
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

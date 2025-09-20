@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+App_De_ActivosFijos,com.miApp,Activo,15,36,0,0,5,13,5,4,5,4
+App_De_ActivosFijos,com.miApp,ListaDobleActivos,194,0,32,0,59,0,23,0,7,0
+App_De_ActivosFijos,com.miApp,ListaCircularDobleDependencias,190,0,30,0,58,0,23,0,8,0
+App_De_ActivosFijos,com.miApp,Dependencias,42,0,2,0,14,0,5,0,4,0
+App_De_ActivosFijos,com.miApp,FechaDeCompra,45,12,12,0,9,5,10,1,4,1
+App_De_ActivosFijos,com.miApp,NodoDependencia,12,0,0,0,5,0,1,0,1,0
+App_De_ActivosFijos,com.miApp,App,1005,0,90,0,316,0,67,0,17,0
+App_De_ActivosFijos,com.miApp,NodoActivo,12,0,0,0,5,0,1,0,1,0

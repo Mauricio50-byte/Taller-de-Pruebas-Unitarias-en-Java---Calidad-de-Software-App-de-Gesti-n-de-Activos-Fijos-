@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ListaDobleActivos.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">App_De_ActivosFijos</a> &gt; <a href="index.source.html" class="el_package">com.miApp</a> &gt; <span class="el_source">ListaDobleActivos.java</span></div><h1>ListaDobleActivos.java</h1><pre class="source lang-java linenums">package com.miApp;
+
+public class ListaDobleActivos {
+    private NodoActivo head;
+    private NodoActivo tail;
+
+<span class="nc" id="L7">    public ListaDobleActivos() {</span>
+<span class="nc" id="L8">        this.head = null;</span>
+<span class="nc" id="L9">        this.tail = null;</span>
+<span class="nc" id="L10">    }</span>
+
+    public void agregar(Activo activo) {
+<span class="nc" id="L13">        NodoActivo nuevoNodo = new NodoActivo(activo);</span>
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        if (head == null) {</span>
+<span class="nc" id="L15">            head = nuevoNodo;</span>
+<span class="nc" id="L16">            tail = nuevoNodo;</span>
+        } else {
+<span class="nc" id="L18">            tail.next = nuevoNodo;</span>
+<span class="nc" id="L19">            nuevoNodo.prev = tail;</span>
+<span class="nc" id="L20">            tail = nuevoNodo;</span>
+        }
+<span class="nc" id="L22">    }</span>
+
+    public NodoActivo getHead() {
+<span class="nc" id="L25">        return head;</span>
+    }
+
+    public NodoActivo getTail() {
+<span class="nc" id="L29">        return tail;</span>
+    }
+
+    // Método para ordenar la lista por número de activo
+    public void ordenarPorNumeroDeActivo() {
+<span class="nc bnc" id="L34" title="All 4 branches missed.">        if (head == null || head.next == null) {</span>
+<span class="nc" id="L35">            return; // No hay o solo hay un elemento en la lista, ya está &quot;ordenada&quot;</span>
+        }
+        
+        boolean swapped;
+        NodoActivo current;
+<span class="nc" id="L40">        NodoActivo last = null;</span>
+
+        do {
+<span class="nc" id="L43">            swapped = false;</span>
+<span class="nc" id="L44">            current = head;</span>
+
+<span class="nc bnc" id="L46" title="All 2 branches missed.">            while (current.next != last) {</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">                if (current.activo.numeroDeActivo &gt; current.next.activo.numeroDeActivo) {</span>
+                    // Intercambiar los activos
+<span class="nc" id="L49">                    Activo temp = current.activo;</span>
+<span class="nc" id="L50">                    current.activo = current.next.activo;</span>
+<span class="nc" id="L51">                    current.next.activo = temp;</span>
+<span class="nc" id="L52">                    swapped = true;</span>
+                }
+<span class="nc" id="L54">                current = current.next;</span>
+            }
+<span class="nc" id="L56">            last = current;</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        } while (swapped);</span>
+<span class="nc" id="L58">    }</span>
+
+    // Método para ordenar la lista por documento del responsable
+    public void ordenarPorDocumentoDelResponsable() {
+<span class="nc bnc" id="L62" title="All 4 branches missed.">        if (head == null || head.next == null) {</span>
+<span class="nc" id="L63">            return; // No hay o solo hay un elemento en la lista, ya está &quot;ordenada&quot;</span>
+        }
+        
+        boolean swapped;
+        NodoActivo current;
+<span class="nc" id="L68">        NodoActivo last = null;</span>
+
+        do {
+<span class="nc" id="L71">            swapped = false;</span>
+<span class="nc" id="L72">            current = head;</span>
+
+<span class="nc bnc" id="L74" title="All 2 branches missed.">            while (current.next != last) {</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                if (current.activo.documentoDelResponsable.compareTo(current.next.activo.documentoDelResponsable) &gt; 0) {</span>
+                    // Intercambiar los activos
+<span class="nc" id="L77">                    Activo temp = current.activo;</span>
+<span class="nc" id="L78">                    current.activo = current.next.activo;</span>
+<span class="nc" id="L79">                    current.next.activo = temp;</span>
+<span class="nc" id="L80">                    swapped = true;</span>
+                }
+<span class="nc" id="L82">                current = current.next;</span>
+            }
+<span class="nc" id="L84">            last = current;</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">        } while (swapped);</span>
+<span class="nc" id="L86">    }</span>
+
+    // Método para ordenar la lista por valor actual
+    public void ordenarPorValorActual() {
+<span class="nc bnc" id="L90" title="All 4 branches missed.">        if (head == null || head.next == null) {</span>
+<span class="nc" id="L91">            return; // No hay o solo hay un elemento en la lista, ya está &quot;ordenada&quot;</span>
+        }
+        
+        boolean swapped;
+        NodoActivo current;
+<span class="nc" id="L96">        NodoActivo last = null;</span>
+
+        do {
+<span class="nc" id="L99">            swapped = false;</span>
+<span class="nc" id="L100">            current = head;</span>
+
+<span class="nc bnc" id="L102" title="All 2 branches missed.">            while (current.next != last) {</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">                if (current.activo.valorActual &gt; current.next.activo.valorActual) {</span>
+                    // Intercambiar los activos
+<span class="nc" id="L105">                    Activo temp = current.activo;</span>
+<span class="nc" id="L106">                    current.activo = current.next.activo;</span>
+<span class="nc" id="L107">                    current.next.activo = temp;</span>
+<span class="nc" id="L108">                    swapped = true;</span>
+                }
+<span class="nc" id="L110">                current = current.next;</span>
+            }
+<span class="nc" id="L112">            last = current;</span>
+<span class="nc bnc" id="L113" title="All 2 branches missed.">        } while (swapped);</span>
+<span class="nc" id="L114">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

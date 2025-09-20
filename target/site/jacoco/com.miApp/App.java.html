@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">App_De_ActivosFijos</a> &gt; <a href="index.source.html" class="el_package">com.miApp</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package com.miApp;
+import java.io.*;
+import java.util.Scanner;
+
+<span class="nc" id="L5">public class App {</span>
+
+    private static final String FILENAME = &quot;datos.txt&quot;; // Nombre del archivo de texto
+
+    public static void main(String[] args) {
+<span class="nc" id="L10">        Scanner lector = new Scanner(System.in);</span>
+<span class="nc" id="L11">        ListaCircularDobleDependencias dependencias = cargarDatosDesdeArchivo();</span>
+
+        int opcion;
+        do {
+<span class="nc" id="L15">            mostrarMenu(); // Mostramos el menu de cada interaccion del bucle</span>
+<span class="nc" id="L16">            opcion = lector.nextInt();</span>
+<span class="nc" id="L17">            lector.nextLine(); // Consumir el salto de línea después del número</span>
+            
+            // Switch para manejar las diferentes opciones del menu
+<span class="nc bnc" id="L20" title="All 12 branches missed.">            switch (opcion) {</span>
+                case 1:
+<span class="nc" id="L22">                    LimpiarPantalla();</span>
+<span class="nc" id="L23">                    agregarDependencia(dependencias, lector);</span>
+<span class="nc" id="L24">                    Pausa();</span>
+<span class="nc" id="L25">                    LimpiarPantalla();</span>
+<span class="nc" id="L26">                    break;</span>
+                case 2:
+<span class="nc" id="L28">                    LimpiarPantalla();</span>
+<span class="nc" id="L29">                    agregarActivo(dependencias, lector);</span>
+<span class="nc" id="L30">                    Pausa();</span>
+<span class="nc" id="L31">                    LimpiarPantalla();</span>
+<span class="nc" id="L32">                    break;</span>
+                case 3:
+<span class="nc" id="L34">                    LimpiarPantalla();</span>
+<span class="nc" id="L35">                    ordenarActivosPorNumero(dependencias);</span>
+<span class="nc" id="L36">                    Pausa();</span>
+<span class="nc" id="L37">                    LimpiarPantalla();</span>
+<span class="nc" id="L38">                    break;</span>
+                case 4:
+<span class="nc" id="L40">                    LimpiarPantalla();</span>
+<span class="nc" id="L41">                    ordenarActivosPorIdentificacion(dependencias);</span>
+<span class="nc" id="L42">                    Pausa();</span>
+<span class="nc" id="L43">                    LimpiarPantalla();</span>
+<span class="nc" id="L44">                    break;</span>
+                case 5:
+<span class="nc" id="L46">                    LimpiarPantalla();</span>
+<span class="nc" id="L47">                    ordenarActivosPorValorActual(dependencias);</span>
+<span class="nc" id="L48">                    Pausa();</span>
+<span class="nc" id="L49">                    LimpiarPantalla();</span>
+<span class="nc" id="L50">                    break;</span>
+                case 6:
+<span class="nc" id="L52">                    LimpiarPantalla();</span>
+<span class="nc" id="L53">                    buscarActivoPorCodigo(dependencias, lector);</span>
+<span class="nc" id="L54">                    Pausa();</span>
+<span class="nc" id="L55">                    LimpiarPantalla();</span>
+<span class="nc" id="L56">                    break;</span>
+                case 7:
+<span class="nc" id="L58">                    LimpiarPantalla();</span>
+<span class="nc" id="L59">                    buscarDependenciaConMenosValor(dependencias);</span>
+<span class="nc" id="L60">                    Pausa();</span>
+<span class="nc" id="L61">                    LimpiarPantalla();</span>
+<span class="nc" id="L62">                    break;</span>
+                case 8:
+<span class="nc" id="L64">                    LimpiarPantalla();</span>
+<span class="nc" id="L65">                    buscarDependenciaConMayorValor(dependencias);</span>
+<span class="nc" id="L66">                    Pausa();</span>
+<span class="nc" id="L67">                    LimpiarPantalla();</span>
+<span class="nc" id="L68">                    break;</span>
+                case 9:
+<span class="nc" id="L70">                    LimpiarPantalla();</span>
+<span class="nc" id="L71">                    buscarDependenciaPorActivo(dependencias, lector);</span>
+<span class="nc" id="L72">                    Pausa();</span>
+<span class="nc" id="L73">                    LimpiarPantalla();</span>
+<span class="nc" id="L74">                    break;</span>
+                case 10:
+<span class="nc" id="L76">                    LimpiarPantalla();</span>
+<span class="nc" id="L77">                    buscarDependenciaPorFechaDeCompra(dependencias, lector);</span>
+<span class="nc" id="L78">                    Pausa();</span>
+<span class="nc" id="L79">                    LimpiarPantalla();</span>
+<span class="nc" id="L80">                    break;</span>
+                case 0:
+<span class="nc" id="L82">                    LimpiarPantalla();</span>
+<span class="nc" id="L83">                    System.out.println(&quot;Saliendo...&quot;); // mensaje de salida</span>
+<span class="nc" id="L84">                    break;</span>
+                default:
+<span class="nc" id="L86">                    System.out.println(&quot;Opcion no valida.&quot;);</span>
+            }
+<span class="nc bnc" id="L88" title="All 2 branches missed.">        } while (opcion != 0); // Continuar hasta que la opción sea 0 (salir)</span>
+        
+        // Cuando se cierra la aplicación, guardar los datos en el archivo
+<span class="nc" id="L91">        guardarDatosEnArchivo(dependencias);</span>
+
+<span class="nc" id="L93">        lector.close(); // cerramos todas las operaciones del Scanner</span>
+<span class="nc" id="L94">    }</span>
+    
+    // Metodo para guardar los datos en el archivo de texto
+    public static void guardarDatosEnArchivo(ListaCircularDobleDependencias dependencias) {
+<span class="nc" id="L98">        try (FileWriter dato = new FileWriter(FILENAME)) {</span>
+<span class="nc" id="L99">            NodoDependencia current = dependencias.getHead();</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">            if (current != null) {</span>
+                do {
+<span class="nc" id="L102">                    Dependencias dependencia = current.dependencia;</span>
+<span class="nc" id="L103">                    dato.write(&quot;Dependencia: &quot; + dependencia.nombre + &quot;\n&quot;);</span>
+<span class="nc" id="L104">                    dato.write(&quot;Centro de costo: &quot; + dependencia.centroDeCosto + &quot;\n&quot;);</span>
+
+<span class="nc" id="L106">                    NodoActivo currentActivo = dependencia.getActivos().getHead();</span>
+<span class="nc bnc" id="L107" title="All 2 branches missed.">                    while (currentActivo != null) {</span>
+<span class="nc" id="L108">                        Activo activo = currentActivo.activo;</span>
+<span class="nc" id="L109">                        dato.write(&quot;Activo: &quot; + activo.numeroDeActivo + &quot;\n&quot;);</span>
+<span class="nc" id="L110">                        dato.write(&quot;Descripcion: &quot; + activo.descripcion + &quot;\n&quot;);</span>
+<span class="nc" id="L111">                        dato.write(&quot;Fecha de compra: &quot; + activo.fechaDeCompra.año + &quot;/&quot; + activo.fechaDeCompra.mes + &quot;/&quot; + activo.fechaDeCompra.dia + &quot;\n&quot;);</span>
+<span class="nc" id="L112">                        dato.write(&quot;Documento del responsable: &quot; + activo.documentoDelResponsable + &quot;\n&quot;);</span>
+<span class="nc" id="L113">                        dato.write(&quot;Nombre del responsable: &quot; + activo.nombreDelResponsable + &quot;\n&quot;);</span>
+<span class="nc" id="L114">                        dato.write(&quot;Valor historico: &quot; + activo.valorHistorico + &quot;\n&quot;);</span>
+<span class="nc" id="L115">                        dato.write(&quot;Valor actual: &quot; + activo.valorActual + &quot;\n&quot;);</span>
+<span class="nc" id="L116">                        dato.write(&quot;Ubicacion especifica: &quot; + activo.ubicacionEspecifica + &quot;\n&quot;);</span>
+<span class="nc" id="L117">                        currentActivo = currentActivo.next;</span>
+<span class="nc" id="L118">                    }</span>
+
+<span class="nc" id="L120">                    dato.write(&quot;\n&quot;); // Separador entre dependencias</span>
+<span class="nc" id="L121">                    current = current.next;</span>
+<span class="nc bnc" id="L122" title="All 2 branches missed.">                } while (current != dependencias.getHead());</span>
+            }
+
+<span class="nc" id="L125">            System.out.println(&quot;Datos guardados en el archivo: &quot; + FILENAME);</span>
+<span class="nc" id="L126">        } catch (IOException e) {</span>
+<span class="nc" id="L127">            System.out.println(&quot;Error al guardar los datos en el archivo: &quot; + e.getMessage());</span>
+<span class="nc" id="L128">        }</span>
+<span class="nc" id="L129">    }</span>
+
+    // Metodo para cargar datos desde el archivo al iniciar del programa
+    public static ListaCircularDobleDependencias cargarDatosDesdeArchivo() {
+<span class="nc" id="L133">        ListaCircularDobleDependencias dependencias = new ListaCircularDobleDependencias();</span>
+
+<span class="nc" id="L135">        try (BufferedReader reader = new BufferedReader(new FileReader(FILENAME))) {</span>
+            String line;
+<span class="nc" id="L137">            Dependencias dependencia = null;</span>
+<span class="nc bnc" id="L138" title="All 2 branches missed.">            while ((line = reader.readLine()) != null) {</span>
+<span class="nc bnc" id="L139" title="All 2 branches missed.">                if (line.startsWith(&quot;Dependencia: &quot;)) {</span>
+<span class="nc" id="L140">                    String nombre = line.substring(&quot;Dependencia: &quot;.length());</span>
+<span class="nc" id="L141">                    String centroDeCosto = reader.readLine().substring(&quot;Centro de costo: &quot;.length());</span>
+<span class="nc" id="L142">                    dependencia = new Dependencias(nombre, centroDeCosto);</span>
+<span class="nc" id="L143">                    dependencias.agregar(dependencia);</span>
+<span class="nc bnc" id="L144" title="All 4 branches missed.">                } else if (line.startsWith(&quot;Activo: &quot;) &amp;&amp; dependencia != null) {</span>
+<span class="nc" id="L145">                    int numeroDeActivo = Integer.parseInt(line.substring(&quot;Activo: &quot;.length()));</span>
+<span class="nc" id="L146">                    String descripcion = reader.readLine().substring(&quot;Descripcion: &quot;.length());</span>
+<span class="nc" id="L147">                    String[] fechaParts = reader.readLine().substring(&quot;Fecha de compra: &quot;.length()).split(&quot;/&quot;);</span>
+<span class="nc" id="L148">                    int año = Integer.parseInt(fechaParts[0]);</span>
+<span class="nc" id="L149">                    int mes = Integer.parseInt(fechaParts[1]);</span>
+<span class="nc" id="L150">                    int dia = Integer.parseInt(fechaParts[2]);</span>
+<span class="nc" id="L151">                    FechaDeCompra fechaDeCompra = new FechaDeCompra(año, mes, dia);</span>
+<span class="nc" id="L152">                    String documentoDelResponsable = reader.readLine().substring(&quot;Documento del responsable: &quot;.length());</span>
+<span class="nc" id="L153">                    String nombreDelResponsable = reader.readLine().substring(&quot;Nombre del responsable: &quot;.length());</span>
+<span class="nc" id="L154">                    double valorHistorico = Double.parseDouble(reader.readLine().substring(&quot;Valor historico: &quot;.length()));</span>
+<span class="nc" id="L155">                    double valorActual = Double.parseDouble(reader.readLine().substring(&quot;Valor actual: &quot;.length()));</span>
+<span class="nc" id="L156">                    String ubicacionEspecifica = reader.readLine().substring(&quot;Ubicacion especifica: &quot;.length());</span>
+
+<span class="nc" id="L158">                    Activo activo = new Activo(numeroDeActivo, descripcion, fechaDeCompra, documentoDelResponsable, nombreDelResponsable, valorHistorico, valorActual, ubicacionEspecifica);</span>
+<span class="nc" id="L159">                    dependencia.agregarActivo(activo);</span>
+<span class="nc" id="L160">                }</span>
+            }
+<span class="nc" id="L162">        } catch (IOException e) {</span>
+<span class="nc" id="L163">            System.out.println(&quot;Error al cargar los datos desde el archivo: &quot; + e.getMessage());</span>
+<span class="nc" id="L164">        }</span>
+
+<span class="nc" id="L166">        return dependencias;</span>
+    }
+
+    // Metodo para mostrar el menu
+    public static void mostrarMenu() {
+<span class="nc" id="L171">        System.out.println(&quot;Menu de opciones:&quot;);</span>
+<span class="nc" id="L172">        System.out.println(&quot;1. Agregar dependencia&quot;);</span>
+<span class="nc" id="L173">        System.out.println(&quot;2. Agregar activo a una dependencia&quot;);</span>
+<span class="nc" id="L174">        System.out.println(&quot;3. Ordenar activos por numero de activo&quot;);</span>
+<span class="nc" id="L175">        System.out.println(&quot;4. Ordenar activos por documento del responsable&quot;);</span>
+<span class="nc" id="L176">        System.out.println(&quot;5. Ordenar activos por valor actual&quot;);</span>
+<span class="nc" id="L177">        System.out.println(&quot;6. Buscar activo por codigo&quot;);</span>
+<span class="nc" id="L178">        System.out.println(&quot;7. Buscar dependencia con menor valor total de activos&quot;);</span>
+<span class="nc" id="L179">        System.out.println(&quot;8. Buscar dependencia con mayor valor total de activos&quot;);</span>
+<span class="nc" id="L180">        System.out.println(&quot;9. Buscar dependencia por activo&quot;);</span>
+<span class="nc" id="L181">        System.out.println(&quot;10. Buscar dependencia por fecha de compra&quot;);</span>
+<span class="nc" id="L182">        System.out.println(&quot;0. Salir&quot;);</span>
+<span class="nc" id="L183">        System.out.print(&quot;Seleccione una opcion: &quot;);</span>
+<span class="nc" id="L184">    }</span>
+
+    // Metodo para agregar una dependencia
+    public static void agregarDependencia(ListaCircularDobleDependencias dependencias, Scanner lector) {
+<span class="nc" id="L188">        System.out.print(&quot;Ingrese el nombre de la dependencia: &quot;);</span>
+<span class="nc" id="L189">        String nombre = lector.nextLine();</span>
+<span class="nc" id="L190">        System.out.print(&quot;Ingrese el centro de costo: &quot;);</span>
+<span class="nc" id="L191">        String centroDeCosto = lector.nextLine();</span>
+<span class="nc" id="L192">        Dependencias nuevaDependencia = new Dependencias(nombre, centroDeCosto);</span>
+<span class="nc" id="L193">        dependencias.agregar(nuevaDependencia);</span>
+<span class="nc" id="L194">        System.out.println(&quot;Dependencia agregada exitosamente.&quot;);</span>
+<span class="nc" id="L195">    }</span>
+
+    // Metodo para agregar un activo a una dependencia
+    public static void agregarActivo(ListaCircularDobleDependencias dependencias, Scanner lector) {
+<span class="nc" id="L199">        System.out.print(&quot;Ingrese el nombre de la dependencia: &quot;);</span>
+<span class="nc" id="L200">        String nombreDependencia = lector.nextLine();</span>
+<span class="nc" id="L201">        NodoDependencia current = dependencias.getHead();</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        if (current != null) {</span>
+            do {
+<span class="nc bnc" id="L204" title="All 2 branches missed.">                if (current.dependencia.nombre.equals(nombreDependencia)) {</span>
+<span class="nc" id="L205">                    System.out.print(&quot;Ingrese el numero de activo: &quot;);</span>
+<span class="nc" id="L206">                    int numeroDeActivo = lector.nextInt();</span>
+<span class="nc" id="L207">                    lector.nextLine(); // Consumir salto de línea</span>
+<span class="nc" id="L208">                    System.out.print(&quot;Ingrese la descripcion: &quot;);</span>
+<span class="nc" id="L209">                    String descripcion = lector.nextLine();</span>
+<span class="nc" id="L210">                    System.out.print(&quot;Ingrese el año de compra: &quot;);</span>
+<span class="nc" id="L211">                    int año = lector.nextInt();</span>
+<span class="nc" id="L212">                    System.out.print(&quot;Ingrese el mes de compra: &quot;);</span>
+<span class="nc" id="L213">                    int mes = lector.nextInt();</span>
+<span class="nc" id="L214">                    System.out.print(&quot;Ingrese el dia de compra: &quot;);</span>
+<span class="nc" id="L215">                    int dia = lector.nextInt();</span>
+<span class="nc" id="L216">                    lector.nextLine(); // Consumir salto de línea</span>
+<span class="nc" id="L217">                    FechaDeCompra fechaDeCompra = new FechaDeCompra(año, mes, dia);</span>
+<span class="nc" id="L218">                    System.out.print(&quot;Ingrese el documento del responsable: &quot;);</span>
+<span class="nc" id="L219">                    String documentoDelResponsable = lector.nextLine();</span>
+<span class="nc" id="L220">                    System.out.print(&quot;Ingrese el nombre del responsable: &quot;);</span>
+<span class="nc" id="L221">                    String nombreDelResponsable = lector.nextLine();</span>
+<span class="nc" id="L222">                    System.out.print(&quot;Ingrese el valor historico: &quot;);</span>
+<span class="nc" id="L223">                    double valorHistorico = lector.nextDouble();</span>
+<span class="nc" id="L224">                    System.out.print(&quot;Ingrese el valor actual: &quot;);</span>
+<span class="nc" id="L225">                    double valorActual = lector.nextDouble();</span>
+<span class="nc" id="L226">                    lector.nextLine(); // Consumir salto de línea</span>
+<span class="nc" id="L227">                    System.out.print(&quot;Ingrese la ubicacion especifica: &quot;);</span>
+<span class="nc" id="L228">                    String ubicacionEspecifica = lector.nextLine();</span>
+
+<span class="nc" id="L230">                    Activo nuevoActivo = new Activo(numeroDeActivo, descripcion, fechaDeCompra, documentoDelResponsable, nombreDelResponsable, valorHistorico, valorActual, ubicacionEspecifica);</span>
+<span class="nc" id="L231">                    current.dependencia.agregarActivo(nuevoActivo);</span>
+<span class="nc" id="L232">                    System.out.println(&quot;Activo agregado exitosamente.&quot;);</span>
+<span class="nc" id="L233">                    return;</span>
+                }
+<span class="nc" id="L235">                current = current.next;</span>
+<span class="nc bnc" id="L236" title="All 2 branches missed.">            } while (current != dependencias.getHead());</span>
+        }
+<span class="nc" id="L238">        System.out.println(&quot;Dependencia no encontrada.&quot;);</span>
+<span class="nc" id="L239">    }</span>
+
+    // Metodo para ordenar activos por numero de activo
+    public static void ordenarActivosPorNumero(ListaCircularDobleDependencias dependencias) {
+<span class="nc" id="L243">        NodoDependencia current = dependencias.getHead();</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">        if (current != null) {</span>
+            do {
+<span class="nc" id="L246">                ListaDobleActivos activos = current.dependencia.getActivos();</span>
+<span class="nc" id="L247">                activos.ordenarPorNumeroDeActivo();</span>
+<span class="nc" id="L248">                current = current.next;</span>
+<span class="nc bnc" id="L249" title="All 2 branches missed.">            } while (current != dependencias.getHead());</span>
+        }
+<span class="nc" id="L251">        System.out.println(&quot;Activos ordenados por numero de activo.&quot;);</span>
+<span class="nc" id="L252">    }</span>
+
+    // Metodo para ordenar activos por documento del responsable
+    public static void ordenarActivosPorIdentificacion(ListaCircularDobleDependencias dependencias) {
+<span class="nc" id="L256">        NodoDependencia current = dependencias.getHead();</span>
+<span class="nc bnc" id="L257" title="All 2 branches missed.">        if (current != null) {</span>
+            do {
+<span class="nc" id="L259">                ListaDobleActivos activos = current.dependencia.getActivos();</span>
+<span class="nc" id="L260">                activos.ordenarPorDocumentoDelResponsable();</span>
+<span class="nc" id="L261">                current = current.next;</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">            } while (current != dependencias.getHead());</span>
+        }
+<span class="nc" id="L264">        System.out.println(&quot;Activos ordenados por documento del responsable.&quot;);</span>
+<span class="nc" id="L265">    }</span>
+
+    // Metodo para ordenar activos por valor actual
+    public static void ordenarActivosPorValorActual(ListaCircularDobleDependencias dependencias) {
+<span class="nc" id="L269">        NodoDependencia current = dependencias.getHead();</span>
+<span class="nc bnc" id="L270" title="All 2 branches missed.">        if (current != null) {</span>
+            do {
+<span class="nc" id="L272">                ListaDobleActivos activos = current.dependencia.getActivos();</span>
+<span class="nc" id="L273">                activos.ordenarPorValorActual();</span>
+<span class="nc" id="L274">                current = current.next;</span>
+<span class="nc bnc" id="L275" title="All 2 branches missed.">            } while (current != dependencias.getHead());</span>
+        }
+<span class="nc" id="L277">        System.out.println(&quot;Activos ordenados por valor actual.&quot;);</span>
+<span class="nc" id="L278">    }</span>
+
+    // Metodo para buscar un activo por codigo
+    public static void buscarActivoPorCodigo(ListaCircularDobleDependencias dependencias, Scanner lector) {
+<span class="nc" id="L282">        System.out.print(&quot;Ingrese el numero de activo: &quot;);</span>
+<span class="nc" id="L283">        int numeroDeActivo = lector.nextInt();</span>
+<span class="nc" id="L284">        lector.nextLine(); // Consumir salto de línea</span>
+
+<span class="nc" id="L286">        NodoDependencia current = dependencias.getHead();</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">        if (current != null) {</span>
+            do {
+<span class="nc" id="L289">                NodoActivo currentActivo = current.dependencia.getActivos().getHead();</span>
+<span class="nc bnc" id="L290" title="All 2 branches missed.">                while (currentActivo != null) {</span>
+<span class="nc bnc" id="L291" title="All 2 branches missed.">                    if (currentActivo.activo.numeroDeActivo == numeroDeActivo) {</span>
+<span class="nc" id="L292">                        System.out.println(&quot;Activo encontrado:&quot;);</span>
+<span class="nc" id="L293">                        System.out.println(&quot;Numero de activo: &quot; + currentActivo.activo.numeroDeActivo);</span>
+<span class="nc" id="L294">                        System.out.println(&quot;Descripcion: &quot; + currentActivo.activo.descripcion);</span>
+<span class="nc" id="L295">                        System.out.println(&quot;Fecha de compra: &quot; + currentActivo.activo.fechaDeCompra.año + &quot;/&quot; + currentActivo.activo.fechaDeCompra.mes + &quot;/&quot; + currentActivo.activo.fechaDeCompra.dia);</span>
+<span class="nc" id="L296">                        System.out.println(&quot;Documento del responsable: &quot; + currentActivo.activo.documentoDelResponsable);</span>
+<span class="nc" id="L297">                        System.out.println(&quot;Nombre del responsable: &quot; + currentActivo.activo.nombreDelResponsable);</span>
+<span class="nc" id="L298">                        System.out.println(&quot;Valor historico: &quot; + currentActivo.activo.valorHistorico);</span>
+<span class="nc" id="L299">                        System.out.println(&quot;Valor actual: &quot; + currentActivo.activo.valorActual);</span>
+<span class="nc" id="L300">                        System.out.println(&quot;Ubicacion especifica: &quot; + currentActivo.activo.ubicacionEspecifica);</span>
+<span class="nc" id="L301">                        return;</span>
+                    }
+<span class="nc" id="L303">                    currentActivo = currentActivo.next;</span>
+                }
+<span class="nc" id="L305">                current = current.next;</span>
+<span class="nc bnc" id="L306" title="All 2 branches missed.">            } while (current != dependencias.getHead());</span>
+        }
+<span class="nc" id="L308">        System.out.println(&quot;Activo no encontrado.&quot;);</span>
+<span class="nc" id="L309">    }</span>
+
+    // Metodo para buscar la dependencia con menor valor total de activos
+    public static void buscarDependenciaConMenosValor(ListaCircularDobleDependencias dependencias) {
+<span class="nc" id="L313">        NodoDependencia current = dependencias.getHead();</span>
+<span class="nc" id="L314">        Dependencias menorDependencia = null;</span>
+<span class="nc" id="L315">        double menorValor = Double.MAX_VALUE;</span>
+
+<span class="nc bnc" id="L317" title="All 2 branches missed.">        if (current != null) {</span>
+            do {
+<span class="nc" id="L319">                double valorTotal = current.dependencia.calcularTotal();</span>
+<span class="nc bnc" id="L320" title="All 2 branches missed.">                if (valorTotal &lt; menorValor) {</span>
+<span class="nc" id="L321">                    menorValor = valorTotal;</span>
+<span class="nc" id="L322">                    menorDependencia = current.dependencia;</span>
+                }
+<span class="nc" id="L324">                current = current.next;</span>
+<span class="nc bnc" id="L325" title="All 2 branches missed.">            } while (current != dependencias.getHead());</span>
+        }
+
+<span class="nc bnc" id="L328" title="All 2 branches missed.">        if (menorDependencia != null) {</span>
+<span class="nc" id="L329">            System.out.println(&quot;Dependencia con menor valor total de activos:&quot;);</span>
+<span class="nc" id="L330">            System.out.println(&quot;Nombre: &quot; + menorDependencia.nombre);</span>
+<span class="nc" id="L331">            System.out.println(&quot;Centro de costo: &quot; + menorDependencia.centroDeCosto);</span>
+<span class="nc" id="L332">            System.out.println(&quot;Valor total: &quot; + menorValor);</span>
+        } else {
+<span class="nc" id="L334">            System.out.println(&quot;No se encontraron dependencias.&quot;);</span>
+        }
+<span class="nc" id="L336">    }</span>
+
+    // Metodo para buscar la dependencia con mayor valor total de activos
+    public static void buscarDependenciaConMayorValor(ListaCircularDobleDependencias dependencias) {
+<span class="nc" id="L340">        NodoDependencia current = dependencias.getHead();</span>
+<span class="nc" id="L341">        Dependencias mayorDependencia = null;</span>
+<span class="nc" id="L342">        double mayorValor = Double.MIN_VALUE;</span>
+
+<span class="nc bnc" id="L344" title="All 2 branches missed.">        if (current != null) {</span>
+            do {
+<span class="nc" id="L346">                double valorTotal = current.dependencia.calcularTotal();</span>
+<span class="nc bnc" id="L347" title="All 2 branches missed.">                if (valorTotal &gt; mayorValor) {</span>
+<span class="nc" id="L348">                    mayorValor = valorTotal;</span>
+<span class="nc" id="L349">                    mayorDependencia = current.dependencia;</span>
+                }
+<span class="nc" id="L351">                current = current.next;</span>
+<span class="nc bnc" id="L352" title="All 2 branches missed.">            } while (current != dependencias.getHead());</span>
+        }
+
+<span class="nc bnc" id="L355" title="All 2 branches missed.">        if (mayorDependencia != null) {</span>
+<span class="nc" id="L356">            System.out.println(&quot;Dependencia con mayor valor total de activos:&quot;);</span>
+<span class="nc" id="L357">            System.out.println(&quot;Nombre: &quot; + mayorDependencia.nombre);</span>
+<span class="nc" id="L358">            System.out.println(&quot;Centro de costo: &quot; + mayorDependencia.centroDeCosto);</span>
+<span class="nc" id="L359">            System.out.println(&quot;Valor total: &quot; + mayorValor);</span>
+        } else {
+<span class="nc" id="L361">            System.out.println(&quot;No se encontraron dependencias.&quot;);</span>
+        }
+<span class="nc" id="L363">    }</span>
+
+    // Metodo para buscar la dependencia que contiene un activo por su numero de activo
+    public static void buscarDependenciaPorActivo(ListaCircularDobleDependencias dependencias, Scanner lector) {
+<span class="nc" id="L367">        System.out.print(&quot;Ingrese el numero de activo: &quot;);</span>
+<span class="nc" id="L368">        int numeroDeActivo = lector.nextInt();</span>
+<span class="nc" id="L369">        lector.nextLine(); // Consumir salto de línea</span>
+
+<span class="nc" id="L371">        NodoDependencia current = dependencias.getHead();</span>
+<span class="nc bnc" id="L372" title="All 2 branches missed.">        if (current != null) {</span>
+            do {
+<span class="nc" id="L374">                NodoActivo currentActivo = current.dependencia.getActivos().getHead();</span>
+<span class="nc bnc" id="L375" title="All 2 branches missed.">                while (currentActivo != null) {</span>
+<span class="nc bnc" id="L376" title="All 2 branches missed.">                    if (currentActivo.activo.numeroDeActivo == numeroDeActivo) {</span>
+<span class="nc" id="L377">                        System.out.println(&quot;Dependencia encontrada:&quot;);</span>
+<span class="nc" id="L378">                        System.out.println(&quot;Nombre: &quot; + current.dependencia.nombre);</span>
+<span class="nc" id="L379">                        System.out.println(&quot;Centro de costo: &quot; + current.dependencia.centroDeCosto);</span>
+<span class="nc" id="L380">                        return;</span>
+                    }
+<span class="nc" id="L382">                    currentActivo = currentActivo.next;</span>
+                }
+<span class="nc" id="L384">                current = current.next;</span>
+<span class="nc bnc" id="L385" title="All 2 branches missed.">            } while (current != dependencias.getHead());</span>
+        }
+<span class="nc" id="L387">        System.out.println(&quot;Dependencia no encontrada.&quot;);</span>
+<span class="nc" id="L388">    }</span>
+
+    // Metodo para buscar dependencias por fecha de compra
+    public static void buscarDependenciaPorFechaDeCompra(ListaCircularDobleDependencias dependencias, Scanner lector) {
+<span class="nc" id="L392">        System.out.print(&quot;Ingrese el año de compra: &quot;);</span>
+<span class="nc" id="L393">        int año = lector.nextInt();</span>
+<span class="nc" id="L394">        System.out.print(&quot;Ingrese el mes de compra: &quot;);</span>
+<span class="nc" id="L395">        int mes = lector.nextInt();</span>
+<span class="nc" id="L396">        System.out.print(&quot;Ingrese el dia de compra: &quot;);</span>
+<span class="nc" id="L397">        int dia = lector.nextInt();</span>
+<span class="nc" id="L398">        lector.nextLine(); // Consumir salto de línea</span>
+
+<span class="nc" id="L400">        FechaDeCompra fechaDeCompra = new FechaDeCompra(año, mes, dia);</span>
+
+<span class="nc" id="L402">        NodoDependencia current = dependencias.getHead();</span>
+<span class="nc" id="L403">        boolean encontrada = false;</span>
+
+<span class="nc bnc" id="L405" title="All 2 branches missed.">        if (current != null) {</span>
+            do {
+<span class="nc" id="L407">                NodoActivo currentActivo = current.dependencia.getActivos().getHead();</span>
+<span class="nc bnc" id="L408" title="All 2 branches missed.">                while (currentActivo != null) {</span>
+<span class="nc bnc" id="L409" title="All 2 branches missed.">                    if (currentActivo.activo.fechaDeCompra.equals(fechaDeCompra)) {</span>
+<span class="nc" id="L410">                        System.out.println(&quot;Dependencia encontrada:&quot;);</span>
+<span class="nc" id="L411">                        System.out.println(&quot;Nombre: &quot; + current.dependencia.nombre);</span>
+<span class="nc" id="L412">                        System.out.println(&quot;Centro de costo: &quot; + current.dependencia.centroDeCosto);</span>
+<span class="nc" id="L413">                        encontrada = true;</span>
+                    }
+<span class="nc" id="L415">                    currentActivo = currentActivo.next;</span>
+                }
+<span class="nc" id="L417">                current = current.next;</span>
+<span class="nc bnc" id="L418" title="All 2 branches missed.">            } while (current != dependencias.getHead());</span>
+        }
+
+<span class="nc bnc" id="L421" title="All 2 branches missed.">        if (!encontrada) {</span>
+<span class="nc" id="L422">            System.out.println(&quot;No se encontraron dependencias con activos comprados en esa fecha.&quot;);</span>
+        }
+<span class="nc" id="L424">    }</span>
+
+    // Metodo para limpiar la pantalla
+    public static void LimpiarPantalla() {
+        try {
+<span class="nc bnc" id="L429" title="All 2 branches missed.">            if (System.getProperty(&quot;os.name&quot;).contains(&quot;Windows&quot;)) {</span>
+<span class="nc" id="L430">                new ProcessBuilder(&quot;cmd&quot;, &quot;/c&quot;, &quot;cls&quot;).inheritIO().start().waitFor();</span>
+            } else {
+<span class="nc" id="L432">                System.out.print(&quot;\033[H\033[2J&quot;);</span>
+<span class="nc" id="L433">                System.out.flush();</span>
+            }
+<span class="nc" id="L435">        } catch (Exception e) {</span>
+<span class="nc" id="L436">            System.out.println(&quot;Error al limpiar la pantalla: &quot; + e.getMessage());</span>
+<span class="nc" id="L437">        }</span>
+<span class="nc" id="L438">    }</span>
+
+    // Metodo para pausar la ejecucion del programa
+    public static void Pausa() {
+<span class="nc" id="L442">        System.out.println(&quot;Presione enter para continuar...&quot;);</span>
+        try {
+<span class="nc" id="L444">            System.in.read();</span>
+<span class="nc" id="L445">        } catch (IOException e) {</span>
+<span class="nc" id="L446">            e.printStackTrace();</span>
+<span class="nc" id="L447">        }</span>
+<span class="nc" id="L448">    }</span>
+}
+    
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
